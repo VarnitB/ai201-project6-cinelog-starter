@@ -12,8 +12,8 @@
 **How I verified:** Compared the validation order and duplicate-query pattern with `add_to_collection()`, confirmed the duplicate check runs before creating or committing a new entry, and ran `pytest tests/ -v` to verify the existing suite still passed.
 
 ## Comment 3 — Missing test
-**What I did:**
-**How I verified:**
+**What I did:** Created `tests/test_watchlist.py` with a test for calling `add_to_watchlist()` with a `film_id` that does not exist. The test uses the same in-memory application fixture, sample-user fixture, fake film ID, and `pytest.raises(FilmNotFoundError)` assertion pattern as `test_add_to_collection_nonexistent_film_raises` in `tests/test_collection.py`.
+**How I verified:** Ran `pytest tests/test_watchlist.py -v` to verify the new test independently, then ran `pytest tests/ -v` to confirm the complete suite passed.
 
 ## Comment 4 — Default visibility
 **My position:**
