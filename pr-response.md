@@ -21,9 +21,9 @@
 **Tradeoff acknowledged:** A saved film can still feel personal, and privacy-conscious users may reasonably expect a new list to be private until they choose otherwise. The public default therefore needs to be communicated clearly rather than treated as an invisible implementation detail. A future visibility toggle would let users make that choice directly; until then, keeping the default public is an intentional tradeoff in favor of CineLog's community and discovery features.
 
 ## Comment 5 — Sort order
-**My position:**
-**Reasoning:**
-**Engagement with reviewer's point:**
+**My position:** I changed the default watchlist order from alphabetical to date added, with the newest additions first.
+**Reasoning:** `WatchlistEntry` already records `date_added`, so the service can provide recent-first ordering without changing the schema. A watchlist is often a running queue of films someone is considering, and putting recent additions first makes it easier to return to the films that prompted their latest interest. 
+**Engagement with reviewer's point:** I agree that most users are more likely to revisit something they just saved than search their watchlist alphabetically. The existing title sort was predictable, but it did not reflect how the list grows over time. Ordering by `WatchlistEntry.date_added.desc()` directly implements the reviewer's preference and matches the newest-first behavior already used by `get_collection()`.
 
 ## Comment 6 — Rebase
 **What conflicted:**
