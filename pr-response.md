@@ -26,9 +26,9 @@
 **Engagement with reviewer's point:** I agree that most users are more likely to revisit something they just saved than search their watchlist alphabetically. The existing title sort was predictable, but it did not reflect how the list grows over time. Ordering by `WatchlistEntry.date_added.desc()` directly implements the reviewer's preference and matches the newest-first behavior already used by `get_collection()`.
 
 ## Comment 6 — Rebase
-**What conflicted:**
-**How I resolved it:**
-**How I verified no conflict remains:**
+**What conflicted:** Rebasing onto `origin/main` produced an add/add conflict in `.gitignore` because both branches had introduced that file. The UUID refactor also created a semantic conflict in `models.py`: main migrated `Film.id` and `CollectionEntry.film_id` to UUID strings and removed the old `WatchlistEntry`, whose foreign key still used an integer.
+**How I resolved it:** Kept main's `.pytest_cache/` exclusion together with the feature branch's existing ignore rules. I then restored `WatchlistEntry` on top of the refactored model using `db.String(36)` for `film_id`, matching `Film.id` and `CollectionEntry.film_id`. I also updated the watchlist service and route documentation to describe film IDs as UUID strings. The nonexistent-film watchlist test already uses a UUID-shaped ID, so it required no change.
+**How I verified no conflict remains:** Ran `pytest tests/ -v`, searched the repository for conflict markers and stale integer watchlist-ID references, and checked the branch history with `git log --merges origin/main..HEAD` to confirm the rebased feature history contains no merge commits.
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
