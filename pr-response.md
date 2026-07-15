@@ -32,3 +32,7 @@
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
+
+## Git Log Screenshot
+
+![git log screenshot](git-log-screenshot.png)
